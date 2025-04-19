@@ -68,7 +68,7 @@ Explore the first 5 records in the country table.
 ## Do you see any blanks or missing data?
 ## (skills: select, limit)
 
-run_sql_and_return_df(cnx,"""
+run_sql_and_return_html(cnx,"""
 select
   *
 from 
@@ -96,7 +96,7 @@ select
 from 
     world_bank_data.wdi_country
 where
-    region is null
+    `Region` is null
 """)
 ```
 

@@ -629,9 +629,6 @@ SELECT
               THEN (country_count * 100.0) / region_total ELSE 0 END), 2) AS 'Lower middle pct',
     ROUND(SUM(CASE WHEN income_cat = 'Low income' 
               THEN (country_count * 100.0) / region_total ELSE 0 END), 2) AS 'Low income pct',
-    ROUND(SUM(CASE WHEN income_cat NOT IN ('High income','Upper middle income',
-                                     'Lower middle income','Low income') 
-              THEN (country_count * 100.0) / region_total ELSE 0 END), 2) AS 'Other pct',
     SUM(country_count) AS 'Total Countries'
 FROM 
     region_income_counts ric
@@ -671,7 +668,7 @@ SELECT
     income_cat AS 'Income Category',
     country_count AS 'Number of Countries',
     gt.total_countries AS 'Global Total',
-    ROUND((country_count * 100.0) / gt.total_countries, 2) AS 'Percentage of Total'
+    ROUND((country_count * 100.0) / gt.total_countries, 1) AS 'Percentage of Total'
 FROM 
     income_counts ic
 CROSS JOIN 

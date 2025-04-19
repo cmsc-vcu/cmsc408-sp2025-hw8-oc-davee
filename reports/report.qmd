@@ -526,7 +526,7 @@ ORDER BY
 ## slam dunk after this!
 ## (skills: select, where, subqueries, joins, aggregate functions)
 
-run_sql_and_return_html(cnx,"""
+run_sql_and_return_df(cnx,"""
 WITH region_income_counts AS (
     -- Base counts from Task 14
     SELECT 
@@ -576,10 +576,6 @@ SELECT
     -- Calculate percentage of global total
     ROUND((ric.country_count * 100.0 / gt.global_count), 2) AS pct_of_global,
     -- Calculate percentage within region
-    ROUND((ric.country_count * 100.0 / rt.region_total), 2) AS pct_in_region,
-    -- Calculate percentage within income category
-    ROUND((ric.country_count * 100.0 / it.income_total), 2) AS pct_of_income_group
-FROM 
     region_income_counts ric
 JOIN 
     region_totals rt ON ric.`Region` = rt.`Region`

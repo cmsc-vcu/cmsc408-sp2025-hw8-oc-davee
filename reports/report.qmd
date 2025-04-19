@@ -50,7 +50,7 @@ How many records are in the country table?
 # How many records are in the world_bank_data.wdi_country table?
 # (skills: select, aggregate)
 
-run_sql_and_return_df(cnx,"""
+run_sql_and_return_html(cnx,"""
 select
   count(*) as "Row Count"
 from
@@ -291,7 +291,7 @@ group by
 run_sql_and_return_html(cnx,"""
 SELECT `Short Name`
 FROM wdi_country
-WHERE `Income Group` is Null
+WHERE `Income Group` = Null
 """)
 
 ```
@@ -433,18 +433,17 @@ LIMIT 1;
 ## the country code for the Marshall Islands is MHL.
 ## (skills: select, where, subquery)
 
-run_sql_and_return_df(cnx,"""
+run_sql_and_return_html(cnx,"""
 SELECT 
     `Country Code`,
     `Short Name`,
     `Region`,
-    `Income Group` AS income_category
+    `Income Group` 
 FROM 
     wdi_country
 WHERE 
     `Region` = (SELECT `Region` FROM wdi_country WHERE `Country Code` = 'MHL')
     AND `Income Group` = (SELECT `Income Group` FROM wdi_country WHERE `Country Code` = 'MHL')
-    AND `Country Code` <> 'MHL'  
 ORDER BY 
     `Short Name`;
 """)
